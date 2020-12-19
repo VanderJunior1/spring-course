@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.springcourse.domain.enums.Role;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,6 +35,8 @@ public class User implements Serializable {
 	
 	@Column(length = 100, nullable = false)
 	private String password;
+	
+	private Role role;
 	
 	private List<Request> requests = new ArrayList<>();
 	
