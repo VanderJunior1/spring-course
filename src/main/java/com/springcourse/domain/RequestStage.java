@@ -39,8 +39,8 @@ public class RequestStage implements Serializable {
 	private Request request;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@JoinColumn(name = "owner_id")
+	private User owner;
 	
 	public RequestStage() {
 	}
@@ -53,7 +53,7 @@ public class RequestStage implements Serializable {
 		this.realizationDate = realizationDate;
 		this.state = state.getCod();
 		this.request = request;
-		this.user = user;
+		this.owner = user;
 	}
 
 	public Integer getId() {
@@ -97,11 +97,11 @@ public class RequestStage implements Serializable {
 	}
 
 	public User getUser() {
-		return user;
+		return owner;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.owner = user;
 	}
 	
 }

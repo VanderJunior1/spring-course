@@ -41,8 +41,8 @@ public class Request implements Serializable {
 	private Integer state;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
+	@JoinColumn(name = "owner_id", nullable = false)
+	private User owner;
 	
 	@OneToMany(mappedBy = "request")
 	private List<RequestStage> stages = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Request implements Serializable {
 		this.description = description;
 		this.creationDate = creationDate;
 		this.state = state.getCod();
-		this.user = user;
+		this.owner = user;
 	}
 
 	public Integer getId() {
@@ -102,11 +102,11 @@ public class Request implements Serializable {
 	}
 
 	public User getUser() {
-		return user;
+		return owner;
 	}
 
 	public void setUser(User user) {
-		this.user = user;
+		this.owner = user;
 	}
 
 	public List<RequestStage> getStages() {

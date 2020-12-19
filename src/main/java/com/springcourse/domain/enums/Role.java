@@ -3,7 +3,7 @@ package com.springcourse.domain.enums;
 public enum Role {
 
 	ADMINSTRATOR(1, "Adminitrador"), 
-	AGENT(2, "Agent");
+	SIMPLE(2, "Simples");
 
 	private int cod;
 	private String descricao;
