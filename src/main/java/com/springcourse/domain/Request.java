@@ -10,14 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.springcourse.domain.enums.RequestState;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Request implements Serializable {
@@ -31,16 +31,20 @@ public class Request implements Serializable {
 	@Column(length = 100, nullable = false)
 	private String subject;
 	
-	@Column(length = 100, nullable = false)
+	@Column(columnDefinition = "text")
 	private String description;
 	
-	@Column(name = "creation_date")
+	@Column(name = "creation_date", nullable = false)
 	private LocalDateTime creationDate;
 	
-	private RequestState state;
+	@Column(nullable = false)
+	private Integer state;
 	
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
+	@OneToMany(mappedBy = "request")
 	private List<RequestStage> stages = new ArrayList<>();
 	
 	public Request() {
@@ -53,8 +57,64 @@ public class Request implements Serializable {
 		this.subject = subject;
 		this.description = description;
 		this.creationDate = creationDate;
-		this.state = state;
+		this.state = state.getCod();
 		this.user = user;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public LocalDateTime getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(LocalDateTime creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public RequestState getState() {
+		return RequestState.toEnum(state);
+	}
+
+	public void setState(RequestState state) {
+		this.state = state.getCod();
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<RequestStage> getStages() {
+		return stages;
+	}
+
+	public void setStages(List<RequestStage> stages) {
+		this.stages = stages;
 	}
 	
 }
